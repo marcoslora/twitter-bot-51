@@ -1,16 +1,18 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.service import Service
 import time
 from passw import TWITTER_EMAIL, TWITTER_PASSWORD
 PROMISED_DOWN = 150
 PROMISED_UP = 10
-CHROME_DRIVER_PATH = "/Users/ml/Documents/Development/chromedriver"
+s = Service("/Users/ml/Documents/Development/chromedriver")
+
 
 
 class InternetSpeedTwitterBot:
     def __init__(self, driver_path):
-        self.driver = webdriver.Chrome(executable_path=driver_path)
+        self.driver = webdriver.Chrome(service=s)
         self.up = 0
         self.down = 0
 
@@ -56,7 +58,7 @@ class InternetSpeedTwitterBot:
         self.driver.quit()
 
 
-bot = InternetSpeedTwitterBot(CHROME_DRIVER_PATH)
+bot = InternetSpeedTwitterBot(s)
 bot.get_internet_speed()
 
 
